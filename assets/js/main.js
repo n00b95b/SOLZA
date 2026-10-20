@@ -33,6 +33,30 @@
     });
   });
 
+  // Iskrice na vrhu strani (kot v logotipu)
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    var star = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0C21.6 11 25 17.6 40 20 26 22.6 21.4 29 20 40 18.6 29 14 22.6 0 20 15 17.6 18.4 11 20 0Z"/></svg>';
+    // [vodoravno, navpično, velikost v px, zamik animacije v s, dodatni razred]
+    var spots = [
+      [{ right: '6%' }, { top: '84px' }, 32, 0, ''],
+      [{ right: '17%' }, { top: '96px' }, 16, 1.1, 'soft'],
+      [{ left: '5%' }, { top: '45%' }, 22, 2.3, 'soft wide'],
+      [{ left: '6%' }, { bottom: '26px' }, 22, .6, ''],
+      [{ right: '9%' }, { bottom: '40px' }, 14, 1.7, 'soft']
+    ];
+    spots.forEach(function (s) {
+      var el = document.createElement('span');
+      el.className = ('spark ' + s[4]).trim();
+      el.setAttribute('aria-hidden', 'true');
+      Object.assign(el.style, s[0], s[1]);
+      el.style.width = el.style.height = s[2] + 'px';
+      el.style.animationDelay = s[3] + 's';
+      el.innerHTML = star;
+      hero.insertBefore(el, hero.firstChild);
+    });
+  }
+
   // Postopen prikaz vsebine
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
